@@ -5,6 +5,7 @@
 A transcript holds everything in the session: your prompts, the model's replies, command output and file contents. That can include **passwords, tokens and other secrets**.
 
 - Only push to a server you control or trust.
+- Admins (and team admins, for their own team) can see each person's usage **numbers** on the [admin usage dashboard](admin-dashboard.md): counts of sessions, tool calls, tokens and alerts, never the content.
 - You must sign in, and **each person sees only the sessions they pushed**, including admins (see [Accounts](accounts.md#your-sessions-are-private)). Whoever runs the server can still read its database and backups, so push only to a server whose owner you trust, and serve it over HTTPS.
 - Install links of [skill templates](skill-templates.md) need no sign-in: anyone with the link can install the template and read its written-here skills. They never expose sessions.
 - Deleting a session removes it from the server. It does not change files on your computer.
