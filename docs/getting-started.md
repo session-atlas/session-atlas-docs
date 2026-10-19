@@ -55,7 +55,7 @@ The top bar has pages, a bell for notifications, a theme button, and your email,
 
 | Page | Use it to |
 | --- | --- |
-| **Dashboard** | See usage across all sessions. |
+| **Dashboard** | See usage across your sessions. |
 | **Sessions** | Find and open a session. |
 | **Commands** | Search every shell command the model ran. |
 | **Rules** | Decide which actions raise an alert. |

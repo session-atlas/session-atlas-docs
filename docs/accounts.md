@@ -24,14 +24,21 @@ Servers can also allow anyone to create an account without an invite, with `ALLO
 
 | Role | Can |
 | --- | --- |
-| **Admin** | Everything a member can, plus: invite people, change roles, remove people. |
-| **Member** | Use every page, create skill templates, and manage their own tokens. |
+| **Admin** | Everything a member can, plus: invite people, change roles, remove people, and create, change or delete [rules](rules-and-alerts.md). |
+| **Member** | Use every page for their own sessions, see the rules, create skill templates, and manage their own tokens. |
 
-There is always at least one admin: the last admin cannot be removed or demoted. Removing a person also deletes their access tokens and their skill templates (so those templates' install links stop working).
+There is always at least one admin: the last admin cannot be removed or demoted. Removing a person also deletes **their sessions and notifications**, their access tokens and their skill templates (so those templates' install links stop working). This cannot be undone.
 
-## Sessions are shared
+## Your sessions are private
 
-Signing in keeps **outsiders** out. It does not separate people from each other: every signed-in person sees **all** sessions, commands and alerts on the server, whoever pushed them. Treat a server as one shared workspace, and only invite people who may see everything in it. See [Privacy](troubleshooting-and-privacy.md#privacy).
+Every session belongs to the person whose [access token](#access-tokens) pushed it, and **only that person sees it**. The same goes for everything built from it: the sessions list, the dashboard, the command search, alerts and notifications. Admins see only their own sessions too; there is no "see everyone's sessions" view.
+
+- Opening someone else's session address gives "not found".
+- A session ID can have only one owner. If you push a session whose ID already belongs to another person, the server refuses it instead of replacing theirs.
+- [Rules](rules-and-alerts.md) are shared across the server and only admins change them. They run on everyone's sessions, but each person sees hits only in their own.
+- Skill templates are the exception: all signed-in people can see them, because sharing them is the point.
+
+Whoever runs the server can still read the database and the backups, so the server's owner can see everything. See [Privacy](troubleshooting-and-privacy.md#privacy).
 
 ## Access tokens
 

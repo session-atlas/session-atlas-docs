@@ -2,6 +2,8 @@
 
 A **rule** is a saved check. When a tool call matches it, that call becomes an **alert**: it is flagged on the map, counted on the dashboard and, if you want, sent as a notification.
 
+Rules are shared by the whole server, so **only admins** create, edit or delete them; everyone else sees them and their hits. A rule runs on every person's sessions, but alerts, counts and notifications only show a person the hits in their own sessions.
+
 ## Built-in rules
 
 A new server starts with six rules. You can edit, disable or delete them. Deleted ones do not come back.

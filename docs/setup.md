@@ -136,17 +136,17 @@ The volume is named after the folder name in `name:`, so it is `session-atlas_ap
 
 ## Running on a server others can reach
 
-Everyone signs in with an account (see [Accounts](accounts.md)), but every signed-in person sees **all** sessions, and sessions can contain secrets. Passwords and access tokens travel with each request, so:
+Everyone signs in with an account (see [Accounts](accounts.md)), but each person sees only their **own** sessions, and sessions can contain secrets. Passwords and access tokens travel with each request, so:
 
 - Serve the web interface over **HTTPS**, using a reverse proxy such as Caddy or Traefik, unless it is on a private network or VPN.
 - Set `SETUP_TOKEN` before the first start, and keep `ALLOW_SIGNUP` off.
-- Only invite people who may see every session.
+- Remember that whoever has access to the server's files or backups can read every session.
 
 The proxy must pass the original host on (`X-Forwarded-Host`) and, for HTTPS, `X-Forwarded-Proto: https`, so login cookies are marked secure. It must also allow uploads as large as `MAX_UPLOAD_MB`.
 
 ## Upgrading from a version without sign-in
 
-After the update, the first visit shows the account setup page. Create the first account and invite the others. Your stored sessions are kept and become visible to everyone with an account.
+After the update, the first visit shows the account setup page. Create the first account and invite the others. Your stored sessions are kept and **belong to the first account**, which is the only one that sees them. Other people start with an empty list and push their own.
 
 Anyone who pushed sessions before needs an [access token](accounts.md#access-tokens): until they add one, `/push-trace` answers that the server needs a token. The quickest way is to send them the install command of a [skill template](skill-templates.md) that includes `push-trace`, or tell them to create a token under **Account** and run the install command again with `--token`.
 

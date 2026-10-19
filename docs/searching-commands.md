@@ -4,7 +4,7 @@ Session Atlas understands the shell commands the model ran. It splits each one, 
 
 ## The Commands page
 
-**Commands** lists every command across all sessions.
+**Commands** lists every command across your sessions.
 
 - **Programs** (left) are sorted by *Most used*, *A–Z*, *Most failures*, *Most sessions* or *Recently used*. Hover for counts, click for the subcommands and flags used most, and click one to search it.
 - **Results** (right) are newest first. Each shows its status and the full command. Click one to open the call in its session, with your search already applied.
