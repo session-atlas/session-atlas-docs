@@ -3,8 +3,6 @@
 ## What you need
 
 - **A Session Atlas server.** Your team may already run one. Ask for its web address. To run your own, follow [Setting up the server](setup.md); it is served at `http://localhost:8080`.
-- **Claude Code**, to create the sessions.
-- **`bash` and `curl`**, which the upload skill uses. Most Macs and Linux machines already have both.
 
 ## 1. Install the `/push-trace` skill
 
