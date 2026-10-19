@@ -14,6 +14,7 @@ Admins open **Team** and choose **Create invite link**.
 
 - The link works **once** and expires after the number of days you pick (1, 7 or 30).
 - The link is shown **only once**. Copy it then. A lost link cannot be shown again, so revoke it and create a new one.
+- Optionally choose a [team](teams.md); the new person joins it and gets its skill template.
 - Optionally attach a [skill template](skill-templates.md). The new person then lands on a welcome page with the command that sets up their skills.
 
 The person opens the link, enters an email and a password (at least 10 characters), and is signed in.

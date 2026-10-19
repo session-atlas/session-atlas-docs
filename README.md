@@ -12,6 +12,7 @@ These docs are for **people who use Session Atlas**. They cover using it, and ru
 | Get Session Atlas running and see my first session | [Getting started](docs/getting-started.md) |
 | Sign in, invite people, manage access tokens | [Accounts and sign-in](docs/accounts.md) |
 | Onboard people with a ready-made set of skills | [Skill templates](docs/skill-templates.md) |
+| Group people into teams with their own skills and dashboard | [Teams](docs/teams.md) |
 | Send sessions to the server, one or all | [Pushing sessions](docs/pushing-sessions.md) |
 | Understand a session and follow what the model did | [Exploring a session](docs/exploring-a-session.md) |
 | Search every shell command the model ran | [Searching commands](docs/searching-commands.md) |
