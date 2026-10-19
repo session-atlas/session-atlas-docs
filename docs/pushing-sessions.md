@@ -27,6 +27,15 @@ The first of these that is set wins:
 
 Always use the address of the **web interface**, the one you open in a browser.
 
+## Which account is used
+
+Uploads are made with your [access token](accounts.md#access-tokens). The first of these that is set wins:
+
+1. The `AGENT_TRACE_TOKEN` environment variable.
+2. The token saved when you installed the skill with `--token` (in `~/.config/agent-trace/token`).
+
+Without a token the server refuses the upload and `/push-trace` tells you to create one under **Account**. Never paste a token into a chat with Claude.
+
 ## Import all your history
 
 ```

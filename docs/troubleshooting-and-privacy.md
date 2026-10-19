@@ -5,7 +5,8 @@
 A transcript holds everything in the session: your prompts, the model's replies, command output and file contents. That can include **passwords, tokens and other secrets**.
 
 - Only push to a server you control or trust.
-- Session Atlas has **no login**. Anyone who can open the address can see every session. Run it on a private network or behind a sign-in proxy.
+- You must sign in, but **every signed-in person sees every session**, whoever pushed it. Only invite people who may read everything on the server, and serve it over HTTPS (see [Accounts](accounts.md)).
+- Install links of [skill templates](skill-templates.md) need no sign-in: anyone with the link can install the template and read its written-here skills. They never expose sessions.
 - Deleting a session removes it from the server. It does not change files on your computer.
 - Rules such as *Secret files touched* help you see when the model handled sensitive files.
 
@@ -23,6 +24,18 @@ Run the install command again and restart Claude Code. If you installed with `--
 - Check the server address: `echo $AGENT_TRACE_URL` and `cat ~/.config/agent-trace/url`.
 - Open the same address in a browser. If it does not load, the server is down or unreachable (VPN, firewall).
 - Use the web interface address, not the backend's.
+
+### The upload says the server needs an access token
+The server needs to know who is pushing. Create a token under **Account** in the web interface, then either install again with `--token YOUR_TOKEN` or put the token in `~/.config/agent-trace/token`. If you did, the token may have been revoked: check the **Account** page.
+
+### I cannot sign in
+- *Wrong email or password*: check both; the email is not case sensitive.
+- *Too many failed attempts*: wait 15 minutes, or ask an admin.
+- You were signed out suddenly: your password was changed, or an admin removed the account. Sign in again.
+- The invite link says it is not valid: invite links work once and expire. Ask an admin for a new one.
+
+### A template's install command reports a skill that was not installed
+The other skills were installed. For a git skill, check the repository address and that `git` works on your computer, and for a private repository that your credentials are set up. The folder you named must contain a `SKILL.md`. See [Skill templates](skill-templates.md).
 
 ### The upload is rejected as too large
 The default limit is 200 MB per upload. Ask whoever runs the server to raise it, or push a smaller session.
