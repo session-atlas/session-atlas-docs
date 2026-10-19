@@ -23,6 +23,8 @@ services:
       MAX_UPLOAD_MB: ${MAX_UPLOAD_MB:-200}
       LOG_FORMAT: ${LOG_FORMAT:-json}
       PUBLIC_URL: ${PUBLIC_URL:-}
+      ALLOW_SIGNUP: ${ALLOW_SIGNUP:-false}
+      SETUP_TOKEN: ${SETUP_TOKEN:-}
     volumes:
       - api-data:/data
     restart: unless-stopped
@@ -55,9 +57,11 @@ Then run:
 docker compose up -d
 ```
 
-Open **http://localhost:8080**. The sessions list is empty until you [push a session](pushing-sessions.md).
+Open **http://localhost:8080**. The first page asks you to **create the first account**, which becomes the admin (see [Accounts](accounts.md)). Do this right away: until the first account exists, whoever opens the address first can create it. On a server others can reach, set `SETUP_TOKEN` before you start it, so the page asks for that secret.
 
-Next, install the skill from the server so people can push sessions: see [Getting started](getting-started.md#1-install-the-push-trace-skill). The command is `curl -fsSL http://localhost:8080/api/skill/install.sh | bash`, with your server's address.
+The sessions list is empty until you [push a session](pushing-sessions.md).
+
+Next, set up your team's skills. In the web interface, **Templates** builds a ready-made set of skills with one install command (see [Skill templates](skill-templates.md)), and **Team** invites people. The command that installs only the push skill is `curl -fsSL http://localhost:8080/api/skill/install.sh | bash`, with your server's address; see [Getting started](getting-started.md#1-install-the-push-trace-skill).
 
 ## Settings
 
@@ -69,6 +73,8 @@ Put these in a file named `.env` next to `docker-compose.yml`, or set them in yo
 | `MAX_UPLOAD_MB` | `200` | The largest upload accepted, in megabytes. |
 | `LOG_FORMAT` | `json` | `json`, or `text` for easier reading. |
 | `PUBLIC_URL` | *(automatic)* | The address people use to reach the server, such as `https://atlas.example.com`. Only needed if the skill install command shows the wrong address (see below). |
+| `ALLOW_SIGNUP` | `false` | `true` lets anyone who can open the address create an account. Otherwise people need an invite link from an admin. Keep it `false` unless the server is on a private network. |
+| `SETUP_TOKEN` | *(none)* | A secret that the first-account page asks for. Set it on a server that others can reach, so a stranger cannot create the first (admin) account. Not needed after setup. |
 
 Only the web interface is exposed. The API is reachable only through it.
 
@@ -130,12 +136,21 @@ The volume is named after the folder name in `name:`, so it is `session-atlas_ap
 
 ## Running on a server others can reach
 
-Session Atlas has **no login**. Anyone who can open the address can see every session, and sessions can contain secrets. Before you share it:
+Everyone signs in with an account (see [Accounts](accounts.md)), but every signed-in person sees **all** sessions, and sessions can contain secrets. Passwords and access tokens travel with each request, so:
 
-- Run it on a private network or VPN, **or**
-- Put it behind a proxy that asks people to sign in, for example Caddy, Traefik, or oauth2-proxy, and serve it over HTTPS.
+- Serve the web interface over **HTTPS**, using a reverse proxy such as Caddy or Traefik, unless it is on a private network or VPN.
+- Set `SETUP_TOKEN` before the first start, and keep `ALLOW_SIGNUP` off.
+- Only invite people who may see every session.
 
-If the proxy sits in front of the web interface, make sure it allows uploads as large as `MAX_UPLOAD_MB`.
+The proxy must pass the original host on (`X-Forwarded-Host`) and, for HTTPS, `X-Forwarded-Proto: https`, so login cookies are marked secure. It must also allow uploads as large as `MAX_UPLOAD_MB`.
+
+## Upgrading from a version without sign-in
+
+After the update, the first visit shows the account setup page. Create the first account and invite the others. Your stored sessions are kept and become visible to everyone with an account.
+
+Anyone who pushed sessions before needs an [access token](accounts.md#access-tokens): until they add one, `/push-trace` answers that the server needs a token. The quickest way is to send them the install command of a [skill template](skill-templates.md) that includes `push-trace`, or tell them to create a token under **Account** and run the install command again with `--token`.
+
+Accounts, tokens and templates live in the same database as the sessions, so the [backup](#back-up-and-restore) covers them.
 
 ## Other ways to run it
 
