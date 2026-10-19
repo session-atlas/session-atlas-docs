@@ -6,21 +6,22 @@
 
 ## 1. Install the `/push-trace` skill
 
-From the `agent-trace-skill` folder:
+The server hands out the skill itself. Run this in a terminal, with your server's address:
 
 ```bash
-./install.sh --url http://localhost:8080
+curl -fsSL http://localhost:8080/api/skill/install.sh | bash
 ```
 
-Replace the address with your server's. It is saved, so you do not have to type it again.
+It installs the skill for you, in every project, and remembers the server address so you do not have to type it again. Restart Claude Code if it was already open.
 
-| Option | Effect |
-| --- | --- |
-| *(none)* | Installs for you, in every project. |
-| `--project /path/to/repo` | Installs for one project only. |
-| `--url <address>` | Saves the server address. |
+To install it for one project only, or to skip remembering the address:
 
-Restart Claude Code if it was already open.
+```bash
+curl -fsSL http://localhost:8080/api/skill/install.sh | bash -s -- --project /path/to/repo
+curl -fsSL http://localhost:8080/api/skill/install.sh | bash -s -- --no-save-url
+```
+
+You can read the script first by opening the same address in a browser. To update the skill later, run the command again.
 
 ## 2. Push a session
 

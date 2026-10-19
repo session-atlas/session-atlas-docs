@@ -22,7 +22,7 @@ The first of these that is set wins:
 
 1. The address you typed after `/push-trace`.
 2. The `AGENT_TRACE_URL` environment variable.
-3. The address saved by `install.sh --url` (in `~/.config/agent-trace/url`).
+3. The address saved when you installed the skill (in `~/.config/agent-trace/url`).
 4. `http://localhost:8080`.
 
 Always use the address of the **web interface**, the one you open in a browser.

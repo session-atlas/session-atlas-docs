@@ -22,6 +22,7 @@ services:
     environment:
       MAX_UPLOAD_MB: ${MAX_UPLOAD_MB:-200}
       LOG_FORMAT: ${LOG_FORMAT:-json}
+      PUBLIC_URL: ${PUBLIC_URL:-}
     volumes:
       - api-data:/data
     restart: unless-stopped
@@ -56,7 +57,7 @@ docker compose up -d
 
 Open **http://localhost:8080**. The sessions list is empty until you [push a session](pushing-sessions.md).
 
-Point the `/push-trace` skill at this address (see [Getting started](getting-started.md#1-install-the-push-trace-skill)).
+Next, install the skill from the server so people can push sessions: see [Getting started](getting-started.md#1-install-the-push-trace-skill). The command is `curl -fsSL http://localhost:8080/api/skill/install.sh | bash`, with your server's address.
 
 ## Settings
 
@@ -67,8 +68,13 @@ Put these in a file named `.env` next to `docker-compose.yml`, or set them in yo
 | `PORT` | `8080` | The port the web interface listens on. |
 | `MAX_UPLOAD_MB` | `200` | The largest upload accepted, in megabytes. |
 | `LOG_FORMAT` | `json` | `json`, or `text` for easier reading. |
+| `PUBLIC_URL` | *(automatic)* | The address people use to reach the server, such as `https://atlas.example.com`. Only needed if the skill install command shows the wrong address (see below). |
 
 Only the web interface is exposed. The API is reachable only through it.
+
+## Skill install address
+
+The skill install script writes the server's address into itself, taken from the address you used to open it. If you reach the server through a proxy that does not pass the original host on (`X-Forwarded-Host`), the script may show the internal address. Set `PUBLIC_URL` to the public address to fix that.
 
 ## Choose a version
 

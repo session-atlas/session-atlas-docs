@@ -2,7 +2,7 @@
 
 Session Atlas turns a Claude Code session into an interactive map of what the model did: every prompt, every tool call, every shell command, and why. It also shows usage across all your sessions and flags risky actions, such as a force push or a read of your `.env` file.
 
-These docs are for **people who use Session Atlas**. They do not cover installing or operating the server.
+These docs are for **people who use Session Atlas**. They cover using it, and running the server with Docker.
 
 ## Start here
 

@@ -12,7 +12,12 @@ A transcript holds everything in the session: your prompts, the model's replies,
 ## Troubleshooting
 
 ### `/push-trace` is not found
-Run `./install.sh` again and restart Claude Code. If you installed with `--project`, you only have the skill inside that project.
+Run the install command again and restart Claude Code. If you installed with `--project`, you only have the skill inside that project.
+
+### The install command fails or shows the wrong address
+- `curl: (7)` or a timeout means the server cannot be reached from your machine. Open the address in a browser to check.
+- If the saved address is wrong (for example an internal name), ask the person running the server to set `PUBLIC_URL`, then install again.
+- If it says it cannot determine the server address, `PUBLIC_URL` is needed too.
 
 ### The upload fails or cannot connect
 - Check the server address: `echo $AGENT_TRACE_URL` and `cat ~/.config/agent-trace/url`.
